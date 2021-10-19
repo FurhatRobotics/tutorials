@@ -1,0 +1,49 @@
+Manifest-Version: 1.0
+Class-Path: furhat-commons-1.25.0.jar slf4j-nop-1.7.25.jar khttp-1.0.0
+ .jar json-20180130.jar kotlin-stdlib-jdk8-1.3.70.jar kotlinx-coroutin
+ es-core-1.2.1.jar spek-junit-platform-engine-1.1.0.jar spek-api-1.1.0
+ .jar kotlin-reflect-1.3.70.jar liblinear-2.30.jar log4j-core-2.9.1.ja
+ r log4j-api-2.9.1.jar commons-lang-2.6.jar commons-io-2.5.jar minimal
+ -json-0.9.4.jar mallet-2.0.8.jar univocity-parsers-2.5.0.jar spark-co
+ re-2.6.0.jar google-cloud-translate-1.94.1.jar google-cloud-core-http
+ -1.91.3.jar google-cloud-core-1.91.3.jar gax-grpc-1.50.1.jar grpc-alt
+ s-1.25.0.jar grpc-grpclb-1.25.0.jar protobuf-java-util-3.10.0.jar gax
+ -httpjson-0.66.1.jar grpc-netty-shaded-1.25.0.jar grpc-core-1.25.0.ja
+ r gson-2.8.5.jar commons-csv-1.5.jar aws-java-sdk-s3-1.11.702.jar aws
+ -java-sdk-kms-1.11.702.jar aws-java-sdk-core-1.11.702.jar jeromq-0.5.
+ 2.jar slf4j-api-1.7.25.jar kotlin-stdlib-jdk7-1.3.70.jar kotlin-stdli
+ b-1.3.70.jar kotlin-stdlib-common-1.3.70.jar junit-4.10.jar bsh-2.0b4
+ .jar jgrapht-0.6.0.jar jwnl-1.4_rc3.jar trove4j-2.0.2.jar mtj-0.9.14.
+ jar jdom-1.1.jar jetty-webapp-9.4.4.v20170414.jar websocket-server-9.
+ 4.4.v20170414.jar jetty-servlet-9.4.4.v20170414.jar jetty-security-9.
+ 4.4.v20170414.jar jetty-server-9.4.4.v20170414.jar websocket-servlet-
+ 9.4.4.v20170414.jar grpc-stub-1.25.0.jar grpc-protobuf-1.25.0.jar grp
+ c-protobuf-lite-1.25.0.jar grpc-auth-1.25.0.jar grpc-api-1.25.0.jar p
+ roto-google-cloud-translate-v3beta1-0.77.1.jar proto-google-cloud-tra
+ nslate-v3-1.0.1.jar proto-google-iam-v1-0.13.0.jar gax-1.50.1.jar api
+ -common-1.8.1.jar proto-google-common-protos-1.17.0.jar protobuf-java
+ -3.10.0.jar google-api-services-translate-v2-rev20170525-1.30.1.jar g
+ oogle-api-client-1.30.4.jar google-auth-library-oauth2-http-0.18.0.ja
+ r google-http-client-jackson2-1.32.1.jar google-http-client-appengine
+ -1.32.1.jar google-oauth-client-1.30.3.jar google-http-client-1.32.1.
+ jar opencensus-contrib-http-util-0.24.0.jar guava-28.1-android.jar th
+ reetenbp-1.4.0.jar google-auth-library-credentials-0.18.0.jar jmespat
+ h-java-1.11.702.jar httpclient-4.5.10.jar commons-logging-1.2.jar ion
+ -java-1.0.2.jar jackson-databind-2.6.7.3.jar jackson-dataformat-cbor-
+ 2.6.7.jar joda-time-2.8.1.jar jnacl-1.0.0.jar hamcrest-core-1.1.jar n
+ etlib-java-0.9.3.jar javax.servlet-api-3.1.0.jar websocket-client-9.4
+ .4.v20170414.jar jetty-client-9.4.4.v20170414.jar jetty-http-9.4.4.v2
+ 0170414.jar websocket-common-9.4.4.v20170414.jar jetty-io-9.4.4.v2017
+ 0414.jar jetty-xml-9.4.4.v20170414.jar websocket-api-9.4.4.v20170414.
+ jar opencensus-contrib-grpc-metrics-0.21.0.jar opencensus-api-0.24.0.
+ jar grpc-context-1.25.0.jar perfmark-api-0.19.0.jar error_prone_annot
+ ations-2.3.3.jar jsr305-3.0.2.jar animal-sniffer-annotations-1.18.jar
+  javax.annotation-api-1.3.2.jar auto-value-annotations-1.6.6.jar http
+ core-4.4.12.jar j2objc-annotations-1.3.jar jackson-core-2.9.9.jar jac
+ kson-annotations-2.6.0.jar arpack_combined_all-0.1.jar jetty-util-9.4
+ .4.v20170414.jar commons-lang3-3.5.jar conscrypt-openjdk-uber-2.2.1.j
+ ar annotations-4.1.1.4.jar annotations-13.0.jar failureaccess-1.0.1.j
+ ar listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar che
+ cker-compat-qual-2.5.5.jar commons-codec-1.11.jar
+Main-Class: furhatos.app.furgui.FurguiSkill
+
