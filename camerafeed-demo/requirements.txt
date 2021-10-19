@@ -1,0 +1,11 @@
+cmake==3.18.2.post1
+distro==1.5.0
+numpy==1.19.1
+opencv-contrib-python==4.2.0.34
+packaging==20.4
+pyparsing==2.4.7
+pyzmq==19.0.2
+scikit-build==0.11.1
+six==1.15.0
+zmq==0.0.0
+

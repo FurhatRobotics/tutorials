@@ -1,0 +1,7 @@
+{
+    "Furhat_IP": "192.168.??.??",
+    "Dev_IP": "192.168.??.??",
+    "detection_exposure_port": "9999",
+    "detection_period": 10,
+    "detection_confidence_threshold": 0.5
+}
