@@ -72,7 +72,7 @@ The server python script requires python3.
    
     `cd simple-talk`
 
-    Download  [mimic-windows.zip](www.speech.kth.se/tts-demos/mimic-windows.zip) and [dectalk-bin.zip](www.speech.kth.se/tts-demos/dectalk-bin.zip) and unzip them. You should end up with a folder structure that looks like
+    Download  [mimic-windows.zip](https://www.speech.kth.se/tts-demos/mimic-windows.zip) and [dectalk-bin.zip](https://www.speech.kth.se/tts-demos/dectalk-bin.zip) and unzip them. You should end up with a folder structure that looks like
     ```
     simple-talk
       +-- bin
