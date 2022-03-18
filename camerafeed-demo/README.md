@@ -2,7 +2,7 @@
 
 Demo that shows an external server listening to the camerafeed, doing object detection and returning the objects back to the skill.
 
- 1. Install Python3 and pip3, and make sure they are accessible from the command line.
+ 1. Install Python3.8 and pip3, and make sure they are accessible from the command line. Other lower python versions may work, but the requirements don't match 3.9 and higher.
 
  2. Install the python requirements (preferably in a virtual env.)
 
