@@ -1,9 +1,9 @@
-package furhatos.app.exampleassetcollection.flow
+package furhatos.app.assetcollectionexample.flow
 
 import furhat.libraries.standard.GesturesLib
 import furhat.libraries.standard.NluLib
 import furhat.libraries.standard.UtilsLib
-import furhatos.app.exampleassetcollection.nlu.UpdateSheets
+import furhatos.app.assetcollectionexample.nlu.UpdateSheets
 import furhatos.flow.kotlin.*
 
 val Parent: State = state {

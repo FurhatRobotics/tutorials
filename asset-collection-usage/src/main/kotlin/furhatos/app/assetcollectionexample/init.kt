@@ -1,11 +1,10 @@
-package furhatos.app.exampleassetcollection
+package furhatos.app.assetcollectionexample
 
-import furhat.libraries.standard.GesturesLib
 import furhat.libraries.standard.UtilsLib
-import furhatos.app.exampleassetcollection.flow.Idle
-import furhatos.app.exampleassetcollection.settings.distanceToEngage
-import furhatos.app.exampleassetcollection.settings.linkGoogleSheet
-import furhatos.app.exampleassetcollection.settings.maxNumberOfUsers
+import furhatos.app.assetcollectionexample.flow.Idle
+import furhatos.app.assetcollectionexample.settings.distanceToEngage
+import furhatos.app.assetcollectionexample.settings.linkGoogleSheet
+import furhatos.app.assetcollectionexample.settings.maxNumberOfUsers
 import furhatos.flow.kotlin.furhat
 import furhatos.flow.kotlin.state
 import furhatos.flow.kotlin.users

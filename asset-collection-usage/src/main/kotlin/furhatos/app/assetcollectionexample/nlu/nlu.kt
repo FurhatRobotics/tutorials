@@ -1,4 +1,4 @@
-package furhatos.app.exampleassetcollection.nlu
+package furhatos.app.assetcollectionexample.nlu
 
 import furhatos.nlu.EnumEntity
 import furhatos.util.Language

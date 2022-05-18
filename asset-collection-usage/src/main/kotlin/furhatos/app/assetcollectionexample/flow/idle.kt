@@ -1,4 +1,4 @@
-package furhatos.app.exampleassetcollection.flow
+package furhatos.app.assetcollectionexample.flow
 
 import furhat.libraries.standard.AutomaticHeadMovements
 import furhat.libraries.standard.utils.attendClosestUser

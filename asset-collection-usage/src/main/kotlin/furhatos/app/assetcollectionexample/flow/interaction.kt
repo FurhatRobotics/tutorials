@@ -1,11 +1,11 @@
-package furhatos.app.exampleassetcollection.flow
+package furhatos.app.assetcollectionexample.flow
 
 import furhat.libraries.standard.GesturesLib
 import furhat.libraries.standard.NluLib
 import furhat.libraries.standard.UtilsLib
 import furhat.libraries.standard.utils.getShortestUser
 import furhat.libraries.standard.utils.usersIncludeShortUser
-import furhatos.app.exampleassetcollection.settings.otherSheet
+import furhatos.app.assetcollectionexample.settings.otherSheet
 import furhatos.nlu.common.*
 import furhatos.flow.kotlin.*
 
