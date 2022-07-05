@@ -1,0 +1,11 @@
+Key,English,Swedish,German,Arabic
+HelloIntent,Hello,Hejsan,"Hallo, mein Freund.",أهلاً يا صديقي.
+,Hi,Tjenare,Wie gehts?,كيف حالك؟
+,Good morning,Godmorgon,,لذلك تريد التحدث بالعربية
+ILoveYou,I love you,Jag älskar dig,"Hallo, mein Freund.",أهلاً يا صديقي.
+,You are amazing,Du är fantastisk,Wie gehts?,كيف حالك؟
+Animal,I like @animal,jag gillar @animal,mag @animal,أهلاً يا صديقي.
+,prefer @animal,föredrar @animal,bevorzuge @animal,كيف حالك؟\
+,@animal person,@animal person,@animal,كيف حالك؟
+Restart,restart,börja om,neu starten,اعادة البدء
+,start over,starta om,,
