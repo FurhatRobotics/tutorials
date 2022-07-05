@@ -1,11 +1,9 @@
 # Skill
-Template skill
+MultiLanguage skill
 
 ## Description
-This is a skill template, see [the docs](https://docs.furhat.io/skills/#the-contents-of-a-skill) for a breakdown of the content.
-For more example skills go to [our Github](https://github.com/FurhatRobotics/)
+This is a code example of how to detect and automatically switch language. It also includes a system for defining 
+intents in a separate csv file for easy translation of intents.  
 
 ## Usage
-Max number of users is set to: 2
-Default interaction distance is set to: 1 meter
-No other specific requirements. 
+Only used as a code example. 
