@@ -1,15 +1,22 @@
 package furhatos.app.assetcollectionexample.flow
 
+import furhat.libraries.standard.AutomaticHeadMovements
 import furhat.libraries.standard.GesturesLib
 import furhat.libraries.standard.NluLib
 import furhat.libraries.standard.UtilsLib
+import furhatos.app.assetcollectionexample.flow.classic.SleepMode
+import furhatos.app.assetcollectionexample.flow.classic.Start
 import furhatos.app.assetcollectionexample.nlu.UpdateSheets
 import furhatos.flow.kotlin.*
+import furhatos.nlu.NullIntent
 
 val Parent: State = state {
 
-    include(UtilsLib.GoogleSheets.getPartialStateIntents()) /** From Asset Collection**/
-    include(UtilsLib.GoogleSheets.getPartialStateIntents(sheetTab = "otherIntents")) /** From Asset Collection**/
+    /** From Asset Collection
+     * RandomHeadMovements is a partial state with OnTime triggers for making random head movements at specified intervals.
+     * Triggers of a partial state can be included in a state with "include()"
+     **/
+    include(AutomaticHeadMovements.RandomHeadMovements(repetitionPeriod = 5000..10000))
 
     onUserLeave(instant = true) {
         furhat.gesture(GesturesLib.ExpressWhatThe1()) /** From Asset Collection**/
@@ -25,7 +32,6 @@ val Parent: State = state {
 
     onResponse<NluLib.IAmDone> { /** From Asset Collection**/
         furhat.say("Very well, I will then go to sleep.")
-        furhat.gesture(GesturesLib.PerformFallAsleepPersist, priority = 1) /** From Asset Collection**/
         goto(SleepMode)
     }
 
@@ -34,5 +40,13 @@ val Parent: State = state {
         furhat.say("I am updating my knowledge.")
         delay(1000)
         goto(Start)
+    }
+
+    onButton("Stop") {
+        goto(Idle)
+    }
+
+    onResponse(NullIntent) {
+        reentry()
     }
 }

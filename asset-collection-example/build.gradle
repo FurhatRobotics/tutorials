@@ -39,13 +39,14 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven { url 'https://repo.gradle.org/gradle/libs-releases' }
+    maven { url "https://s3-eu-west-1.amazonaws.com/furhat-maven/snapshots"}
     maven { url "https://s3-eu-west-1.amazonaws.com/furhat-maven/releases"}
 }
 
 
 dependencies {
-    compile 'com.furhatrobotics.furhatos:furhat-commons:2.3.0'
-    compile 'com.furhatrobotics.assets:StandardLibraryCollection:1.1.1'
+    compile 'com.furhatrobotics.furhatos:furhat-commons:2.4.0'
+    compile 'com.furhatrobotics.assets:StandardLibraryCollection:1.1.4-neomTestSheets-16-SNAP'
 }
 
 jar {
