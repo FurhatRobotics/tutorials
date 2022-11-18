@@ -1,10 +1,12 @@
 package furhatos.app.assetcollectionexample.flow
 
 import furhatos.app.assetcollectionexample.flow.classic.Start
-import furhatos.app.assetcollectionexample.flow.localized.MultiLangState
-import furhatos.flow.kotlin.*
+import furhatos.flow.kotlin.State
+import furhatos.flow.kotlin.furhat
+import furhatos.flow.kotlin.onUserEnter
+import furhatos.flow.kotlin.state
 
-val Idle: State = state {
+val Idle: State = state(WizardParentButtons) {
 
     onEntry {
         furhat.attendNobody()
@@ -13,13 +15,5 @@ val Idle: State = state {
     onUserEnter {
         furhat.attend(it)
         goto(Start)
-    }
-
-    onButton("Regular flow") {
-        goto(Start)
-    }
-
-    onButton("Localized flow") {
-        goto(MultiLangState)
     }
 }

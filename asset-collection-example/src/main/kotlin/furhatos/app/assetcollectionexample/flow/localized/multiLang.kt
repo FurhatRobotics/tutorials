@@ -45,7 +45,7 @@ val MultiLangState : State = state(Parent) {
     }
 
     onNoResponse {
-        goto(Idle)
+        reentry()
     }
 }
 

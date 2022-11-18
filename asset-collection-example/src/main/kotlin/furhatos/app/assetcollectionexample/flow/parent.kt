@@ -4,13 +4,34 @@ import furhat.libraries.standard.AutomaticHeadMovements
 import furhat.libraries.standard.GesturesLib
 import furhat.libraries.standard.NluLib
 import furhat.libraries.standard.UtilsLib
+import furhatos.app.assetcollectionexample.flow.buttonStates.exploreTagGestures
+import furhatos.app.assetcollectionexample.flow.buttonStates.exploreTags
 import furhatos.app.assetcollectionexample.flow.classic.SleepMode
 import furhatos.app.assetcollectionexample.flow.classic.Start
+import furhatos.app.assetcollectionexample.flow.localized.MultiLangState
 import furhatos.app.assetcollectionexample.nlu.UpdateSheets
 import furhatos.flow.kotlin.*
 import furhatos.nlu.NullIntent
 
-val Parent: State = state {
+val WizardParentButtons = state {
+    onButton("Explore supported tags") {
+        goto(exploreTags)
+    }
+
+    onButton("Explore supported tag gestures") {
+        goto(exploreTagGestures)
+    }
+
+    onButton("Regular flow") {
+        goto(Start)
+    }
+
+    onButton("Localized flow") {
+        goto(MultiLangState)
+    }
+}
+
+val Parent: State = state(WizardParentButtons) {
 
     /** From Asset Collection
      * RandomHeadMovements is a partial state with OnTime triggers for making random head movements at specified intervals.
@@ -30,9 +51,15 @@ val Parent: State = state {
         furhat.glance(it)
     }
 
+    /** From Asset Collection
+     *  Here we create a onResponse without languages.
+     */
+    onResponse(UtilsLib.GoogleSheets.localizedIntent("goToSleep", intentLanguages = null)) {
+        gotoSleep()
+    }
+
     onResponse<NluLib.IAmDone> { /** From Asset Collection**/
-        furhat.say("Very well, I will then go to sleep.")
-        goto(SleepMode)
+        gotoSleep()
     }
 
     onResponse<UpdateSheets> {
@@ -49,4 +76,9 @@ val Parent: State = state {
     onResponse(NullIntent) {
         reentry()
     }
+}
+
+fun FlowControlRunner.gotoSleep() {
+    furhat.say("Very well, I will then go to sleep.")
+    goto(SleepMode)
 }

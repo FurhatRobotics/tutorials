@@ -17,10 +17,11 @@ val Init = state {
         furhat.voice = englishVoice
 
         /** From Asset Collection
-         * Point to the Google sheet used as resource for fetching utterances and intents
+         * Point to the Google sheet used as resource for fetching regular utterances and intents
          * Link for the browser: https://docs.google.com/spreadsheets/d/${linkGoogleSheet}/
          **/
-        UtilsLib.GoogleSheets.updateDefaultSheetLink(linkGoogleSheet)
+        UtilsLib.GoogleSheets.setDefaultSheetLink(linkGoogleSheet)
+        UtilsLib.GoogleSheets.setDefaultSheetIds(textsPrimarySheet, intentsPrimarySheet, buttonsPrimarySheet)
 
         /** From Asset Collection
          * Point to the Google sheet used as resource for fetching localized utterances and intents
