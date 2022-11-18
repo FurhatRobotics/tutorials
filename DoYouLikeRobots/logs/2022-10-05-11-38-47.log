@@ -1,0 +1,4 @@
+11:38:48 [Skill] INFO  Skill:137 - Connecting to Furhat server on 0.0.0.0:1932
+11:38:48 [DoyoulikerobotstutorialSkill] INFO  DoyoulikerobotstutorialSkill:164 - Starting skill
+11:43:59 [EventSystem] ERROR EventSystem:182 - Timed out while waiting for class furhatos.event.responses.ResponseFaceEngine
+11:43:59 [EventSystem] WARN  FurhatFace:255 - Exception while waiting for FaceEngine
