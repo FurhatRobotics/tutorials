@@ -1,7 +1,7 @@
 package furhatos.app.assetcollectionexample.flow.localized
 
 import furhat.libraries.standard.UtilsLib
-import furhat.libraries.standard.utils.sheetsIntegration.textLanguage
+import furhat.libraries.standard.utils.GoogleSheetsIntegration.Companion.textLanguage
 import furhatos.app.assetcollectionexample.englishVoice
 import furhatos.app.assetcollectionexample.flow.Idle
 import furhatos.app.assetcollectionexample.flow.Parent
@@ -32,7 +32,7 @@ val MultiLangState : State = state(Parent) {
         reentry()
     }
 
-    /** This one will not excecute in Swedish, even though the translation is present */
+    /** This one will not execute in Swedish, even though the translation is present */
     onResponse(UtilsLib.GoogleSheets.localizedIntent("general-goodbye",  intentLanguages = listOf(Language.ENGLISH_US, Language.FRENCH))) {
         goto(Idle)
     }

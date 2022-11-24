@@ -1,10 +1,10 @@
 package furhatos.app.assetcollectionexample
 
+import furhat.libraries.standard.UsersLib.usersLib
 import furhat.libraries.standard.UtilsLib
-import furhat.libraries.standard.utils.attendClosestUser
-import furhat.libraries.standard.utils.sheetsIntegration.textLanguage
+import furhat.libraries.standard.utils.GoogleSheetsIntegration.Companion.textLanguage
 import furhatos.app.assetcollectionexample.flow.Idle
-import furhatos.app.assetcollectionexample.flow.classic.Start
+import furhatos.app.assetcollectionexample.flow.classic.StartUnlocalized
 import furhatos.flow.kotlin.furhat
 import furhatos.flow.kotlin.state
 import furhatos.flow.kotlin.users
@@ -28,14 +28,15 @@ val Init = state {
          * Link for the browser: https://docs.google.com/spreadsheets/d/${linkGoogleSheet}/
          **/
         UtilsLib.GoogleSheets.loadLocalizedContent(localizedSheet, sheetTabs)
+
         /** From Asset Collection
          * Used to know which language to use with the localized sheet
          */
         textLanguage = Language.ENGLISH_US
 
         if (users.count >= 1) {
-            furhat.attendClosestUser() /** From Asset Collection**/
-            goto(Start)
+            furhat.usersLib.attendClosestUser() /** From Asset Collection**/
+            goto(StartUnlocalized)
         } else {
             goto(Idle)
         }

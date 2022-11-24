@@ -1,29 +1,29 @@
 package furhatos.app.assetcollectionexample.flow
 
-import furhat.libraries.standard.AutomaticHeadMovements
+import furhat.libraries.standard.BehaviorLib
 import furhat.libraries.standard.GesturesLib
 import furhat.libraries.standard.NluLib
 import furhat.libraries.standard.UtilsLib
 import furhatos.app.assetcollectionexample.flow.buttonStates.exploreTagGestures
 import furhatos.app.assetcollectionexample.flow.buttonStates.exploreTags
 import furhatos.app.assetcollectionexample.flow.classic.SleepMode
-import furhatos.app.assetcollectionexample.flow.classic.Start
+import furhatos.app.assetcollectionexample.flow.classic.StartUnlocalized
 import furhatos.app.assetcollectionexample.flow.localized.MultiLangState
 import furhatos.app.assetcollectionexample.nlu.UpdateSheets
 import furhatos.flow.kotlin.*
 import furhatos.nlu.NullIntent
 
 val WizardParentButtons = state {
-    onButton("Explore supported tags") {
+    onButton("Explore Google Sheet supported azure voice tags") {
         goto(exploreTags)
     }
 
-    onButton("Explore supported tag gestures") {
+    onButton("Explore Google Sheet supported azure gesture tags") {
         goto(exploreTagGestures)
     }
 
     onButton("Regular flow") {
-        goto(Start)
+        goto(StartUnlocalized)
     }
 
     onButton("Localized flow") {
@@ -34,10 +34,10 @@ val WizardParentButtons = state {
 val Parent: State = state(WizardParentButtons) {
 
     /** From Asset Collection
-     * RandomHeadMovements is a partial state with OnTime triggers for making random head movements at specified intervals.
+     * randomHeadMovements is a partial state with OnTime triggers for making random head movements at specified intervals.
      * Triggers of a partial state can be included in a state with "include()"
-     **/
-    include(AutomaticHeadMovements.RandomHeadMovements(repetitionPeriod = 5000..10000))
+     */
+    include(BehaviorLib.AutomaticMovements.randomHeadMovements(repetitionPeriod = 5000..10000))
 
     onUserLeave(instant = true) {
         furhat.gesture(GesturesLib.ExpressWhatThe1()) /** From Asset Collection**/
@@ -66,7 +66,7 @@ val Parent: State = state(WizardParentButtons) {
         UtilsLib.GoogleSheets.updateAllFromGoogleSheet() /** From Asset Collection**/
         furhat.say("I am updating my knowledge.")
         delay(1000)
-        goto(Start)
+        goto(StartUnlocalized)
     }
 
     onButton("Stop") {

@@ -1,22 +1,21 @@
 package furhatos.app.assetcollectionexample.flow.classic
 
-import furhat.libraries.standard.AutomaticHeadMovements
+import furhat.libraries.standard.BehaviorLib
 import furhat.libraries.standard.GesturesLib
 import furhat.libraries.standard.NluLib
+import furhat.libraries.standard.UsersLib.usersLib
 import furhat.libraries.standard.UtilsLib
-import furhat.libraries.standard.utils.getShortestUser
-import furhat.libraries.standard.utils.usersIncludeShortUser
 import furhatos.app.assetcollectionexample.flow.Idle
 import furhatos.app.assetcollectionexample.flow.Parent
 import furhatos.app.assetcollectionexample.otherIntentsPrimarySheet
 import furhatos.app.assetcollectionexample.otherSheet
 import furhatos.app.assetcollectionexample.textsSecondarySheet
-import furhatos.nlu.common.*
 import furhatos.flow.kotlin.*
 import furhatos.nlu.NullIntent
+import furhatos.nlu.common.No
 
 
-val Start : State = state(Parent) {
+val StartUnlocalized : State = state(Parent) {
 
     include(UtilsLib.GoogleSheets.getPartialStateIntents()) /** From Asset Collection**/
     include(UtilsLib.GoogleSheets.getPartialStateIntents(sheetTab = otherIntentsPrimarySheet)) /** From Asset Collection**/
@@ -25,11 +24,11 @@ val Start : State = state(Parent) {
         /** From Asset Collection
          * Convenience method to get any short user, e.g. a child.
          **/
-        if (usersIncludeShortUser(-0.2)) {
+        if (usersLib.usersIncludeShortUser(-0.2)) {
             for (userToGreet in users.list) { // Will greet every user
                 furhat.attend(userToGreet)
                 delay(300)
-                if (userToGreet == getShortestUser()){ /** From Asset Collection**/
+                if (userToGreet == usersLib.getShortestUser()){ /** From Asset Collection**/
                     furhat.gesture(GesturesLib.PerformBigSmileWithDelay()) /**From Asset Collection**/
                     furhat.say("Oh, hello there, little one!")
                 } else {
@@ -59,7 +58,7 @@ val Start : State = state(Parent) {
 
         furhat.say("Now with some movements")
         /** Set value to avoid AutomaticHeadMovements to interfere with other head movements defined in a gesture. We assume gestures are not longer than 3000 ms **/
-        AutomaticHeadMovements.autoHeadMovementDelay(3000)
+        BehaviorLib.AutomaticMovements.autoHeadMovementDelay(3000)
         furhat.say(UtilsLib.GoogleSheets.getText("greetingWithUtterance")) /**From Asset Collection**/
 
         furhat.say("Now with fallbacks")

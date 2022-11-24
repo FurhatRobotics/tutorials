@@ -1,6 +1,6 @@
 package furhatos.app.assetcollectionexample.flow
 
-import furhatos.app.assetcollectionexample.flow.classic.Start
+import furhatos.app.assetcollectionexample.flow.classic.StartUnlocalized
 import furhatos.flow.kotlin.State
 import furhatos.flow.kotlin.furhat
 import furhatos.flow.kotlin.onUserEnter
@@ -14,6 +14,6 @@ val Idle: State = state(WizardParentButtons) {
 
     onUserEnter {
         furhat.attend(it)
-        goto(Start)
+        goto(StartUnlocalized)
     }
 }

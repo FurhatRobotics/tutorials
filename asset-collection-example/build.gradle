@@ -47,7 +47,7 @@ repositories {
 
 dependencies {
     compile 'com.furhatrobotics.furhatos:furhat-commons:2.4.1' // TODO : Change to 2.5.0 to inclu de azure voices
-    compile 'com.furhatrobotics.assets:StandardLibraryCollection:1.2.0-test6-SNAP' //TODO : 1.2.0 when it's officially out
+    compile 'com.furhatrobotics.assets:StandardLibraryCollection:1.2.0-refacto4-SNAP' //TODO : 1.2.0 when it's officially out
 }
 
 jar {
