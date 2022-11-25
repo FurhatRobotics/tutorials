@@ -18,6 +18,7 @@ var SleepMode = state(WizardParentButtons) {
 
     onEntry {
         furhat.gesture(GesturesLib.PerformFallAsleepPersist, priority = 1) /** From Asset Collection**/
+        send(UtilsLib.LEDs.pulseLEDStart()) /** From Asset Collection**/
         furhat.listen()
     }
 
@@ -43,5 +44,6 @@ var SleepMode = state(WizardParentButtons) {
 
     onExit {
         furhat.gesture(GesturesLib.PerformWakeUpWithHeadShake, priority = 1) /** From Asset Collection**/
+        send(UtilsLib.LEDs.pulseLEDStop) /** From Asset Collection**/
     }
 }

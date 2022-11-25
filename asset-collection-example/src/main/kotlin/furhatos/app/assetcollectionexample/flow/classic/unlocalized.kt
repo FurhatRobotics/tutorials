@@ -23,7 +23,7 @@ val StartUnlocalized : State = state(Parent) {
     onEntry {
         /** From Asset Collection
          * Convenience method to get any short user, e.g. a child.
-         **/
+         */
         if (usersLib.usersIncludeShortUser(-0.2)) {
             for (userToGreet in users.list) { // Will greet every user
                 furhat.attend(userToGreet)
