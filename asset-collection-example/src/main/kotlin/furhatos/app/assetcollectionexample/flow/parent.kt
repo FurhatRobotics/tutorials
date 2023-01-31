@@ -1,19 +1,34 @@
 package furhatos.app.assetcollectionexample.flow
 
-import furhat.libraries.standard.BehaviorLib
 import furhat.libraries.standard.GesturesLib
 import furhat.libraries.standard.NluLib
 import furhat.libraries.standard.UtilsLib
+import furhatos.app.assetcollectionexample.flow.behaviorlibrary.behaviorLibExample
 import furhatos.app.assetcollectionexample.flow.buttonStates.exploreTagGestures
 import furhatos.app.assetcollectionexample.flow.buttonStates.exploreTags
 import furhatos.app.assetcollectionexample.flow.classic.SleepMode
 import furhatos.app.assetcollectionexample.flow.classic.StartUnlocalized
+import furhatos.app.assetcollectionexample.flow.gestureslibrary.gesturesLibExample
 import furhatos.app.assetcollectionexample.flow.localized.MultiLangState
 import furhatos.app.assetcollectionexample.nlu.UpdateSheets
 import furhatos.flow.kotlin.*
 import furhatos.nlu.NullIntent
 
-val WizardParentButtons = state {
+val WizardParentButtons: State = state {
+
+    onButton("BehaviorLib") {
+        goto(behaviorLibExample)
+    }
+
+    onButton("GesturesLib") {
+        goto(gesturesLibExample)
+    }
+
+    //TODO : add voice commands
+
+
+
+    // UtilsLib && GoogleSheet integration
     onButton("Explore Google Sheet supported azure voice tags") {
         goto(exploreTags)
     }
@@ -33,11 +48,9 @@ val WizardParentButtons = state {
 
 val Parent: State = state(WizardParentButtons) {
 
-    /** From Asset Collection
-     * randomHeadMovements is a partial state with OnTime triggers for making random head movements at specified intervals.
-     * Triggers of a partial state can be included in a state with "include()"
-     */
-    include(BehaviorLib.AutomaticMovements.randomHeadMovements(repetitionPeriod = 5000..10000))
+    onButton("Menu") {
+        goto(Idle)
+    }
 
     onUserLeave(instant = true) {
         furhat.gesture(GesturesLib.ExpressWhatThe1()) /** From Asset Collection**/

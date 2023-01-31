@@ -1,52 +1,24 @@
 package furhatos.app.assetcollectionexample
 
-import furhat.libraries.standard.UsersLib.usersLib
-import furhat.libraries.standard.UtilsLib
-import furhat.libraries.standard.utils.GoogleSheetsIntegration.Companion.textLanguage
 import furhatos.app.assetcollectionexample.flow.Idle
-import furhatos.app.assetcollectionexample.flow.classic.StartUnlocalized
 import furhatos.flow.kotlin.furhat
 import furhatos.flow.kotlin.state
 import furhatos.flow.kotlin.users
-import furhatos.util.Language
 
 val Init = state {
 
     init {
         users.setSimpleEngagementPolicy(distanceToEngage, maxNumberOfUsers)
         furhat.voice = englishVoice
-
-        // Classic GoogleSheet integration settings
-        /** From Asset Collection
-         * Point to the Google sheet used as resource for fetching regular utterances and intents
-         * Link for the browser: https://docs.google.com/spreadsheets/d/${linkGoogleSheet}/
-         */
-        UtilsLib.GoogleSheets.setDefaultSheetLink(linkGoogleSheet)
-        UtilsLib.GoogleSheets.setDefaultSheetIds(textsPrimarySheet, intentsPrimarySheet, buttonsPrimarySheet)
-
-        // Localized GoogleSheet integration settings
-        /** From Asset Collection
-         * Point to the Google sheet used as resource for fetching localized utterances and intents
-         * Link for the browser: https://docs.google.com/spreadsheets/d/${linkGoogleSheet}/
-         */
-        UtilsLib.GoogleSheets.loadLocalizedContent(localizedSheet, sheetTabs)
-
-        /** From Asset Collection
-         * Used to know which language to use with the localized sheet
-         */
-        textLanguage = Language.ENGLISH_US
-
-        /** From Asset Collection
-         * Have a background state that makes LEDs glow
-         */
-        parallel{ goto(UtilsLib.LEDs.PulseLEDState) }
-        send(UtilsLib.LEDs.pulseLEDStop)
+        furhat.mask = "Adult"
+        furhat.character = "Alex"
 
         if (users.count >= 1) {
-            furhat.usersLib.attendClosestUser() /** From Asset Collection**/
-            goto(StartUnlocalized)
-        } else {
-            goto(Idle)
+            furhat.attend(users.random)
         }
+        furhat.say("Hello ! This skill is a demonstration of what functions are available in the Standard Library Collection and how they can be used.")
+        furhat.say("There are five different libraries available. Please wizard your way through the skill to explore them.")
+
+        goto(Idle)
     }
 }

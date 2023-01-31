@@ -56,9 +56,6 @@ val StartUnlocalized : State = state(Parent) {
         furhat.say("I'm glad you are positive! Here are some lines from Google Sheets.")
         furhat.say(UtilsLib.GoogleSheets.getText("greeting", textsSecondarySheet, otherSheet)) /**From Asset Collection**/
 
-        furhat.say("Now with some movements")
-        /** Set value to avoid AutomaticHeadMovements to interfere with other head movements defined in a gesture. We assume gestures are not longer than 3000 ms **/
-        BehaviorLib.AutomaticMovements.autoHeadMovementDelay(3000)
         furhat.say(UtilsLib.GoogleSheets.getText("greetingWithUtterance")) /**From Asset Collection**/
 
         furhat.say("Now with fallbacks")

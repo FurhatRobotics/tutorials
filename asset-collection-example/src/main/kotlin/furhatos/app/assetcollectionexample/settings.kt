@@ -1,5 +1,6 @@
 package furhatos.app.assetcollectionexample
 
+import furhatos.flow.kotlin.voice.AzureVoice
 import furhatos.flow.kotlin.voice.PollyVoice
 import furhatos.flow.kotlin.voice.Voice
 import furhatos.util.Language
@@ -10,7 +11,7 @@ const val distanceToEngage = 1.0
 
 
 // Voice Params
-val englishVoice = if (Voice("JennyNeural").isAvailable) Voice("JennyNeural") else PollyVoice.Matthew() //TODO : Better once Azure is in
+val englishVoice = if (AzureVoice("JennyNeural").isAvailable) AzureVoice("JennyNeural") else PollyVoice.Matthew()
 val swedishVoice = Voice(language = Language.SWEDISH)
 val frenchVoice = Voice(language = Language.FRENCH)
 
