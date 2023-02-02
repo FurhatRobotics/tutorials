@@ -1,10 +1,10 @@
-package furhatos.app.assetcollectionexample.flow.classic
+package furhatos.app.assetcollectionexample.flow.utilsLibrary.googleSheets.classic
 
 import furhat.libraries.standard.GesturesLib
 import furhat.libraries.standard.NluLib
 import furhat.libraries.standard.UtilsLib
-import furhatos.app.assetcollectionexample.flow.Idle
-import furhatos.app.assetcollectionexample.flow.WizardParentButtons
+import furhatos.app.assetcollectionexample.flow.Menu
+import furhatos.app.assetcollectionexample.flow.utilsLibrary.UtilsLibParent
 import furhatos.app.assetcollectionexample.intentsSecondarySheet
 import furhatos.app.assetcollectionexample.otherSheet
 import furhatos.flow.kotlin.furhat
@@ -12,7 +12,7 @@ import furhatos.flow.kotlin.onNoResponse
 import furhatos.flow.kotlin.onResponse
 import furhatos.flow.kotlin.state
 
-var SleepMode = state(WizardParentButtons) {
+var SleepMode = state(UtilsLibParent) {
 
     include(UtilsLib.GoogleSheets.getPartialStateIntents(sheetLink = otherSheet, sheetTab = intentsSecondarySheet)) /** From Asset Collection**/
 
@@ -27,7 +27,7 @@ var SleepMode = state(WizardParentButtons) {
     }
 
     onResponse<NluLib.WakeUp> {
-        goto(Idle)
+        goto(Menu)
     }
 
     onNoResponse {

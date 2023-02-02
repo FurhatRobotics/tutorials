@@ -1,16 +1,16 @@
-package furhatos.app.assetcollectionexample.flow.localized
+package furhatos.app.assetcollectionexample.flow.utilsLibrary.googleSheets.localized
 
 import furhat.libraries.standard.UtilsLib
 import furhat.libraries.standard.utils.GoogleSheetsIntegration.Companion.textLanguage
 import furhatos.app.assetcollectionexample.englishVoice
-import furhatos.app.assetcollectionexample.flow.Idle
-import furhatos.app.assetcollectionexample.flow.Parent
+import furhatos.app.assetcollectionexample.flow.Menu
+import furhatos.app.assetcollectionexample.flow.utilsLibrary.UtilsLibParent
 import furhatos.app.assetcollectionexample.frenchVoice
 import furhatos.app.assetcollectionexample.swedishVoice
 import furhatos.flow.kotlin.*
 import furhatos.util.Language
 
-val MultiLangState : State = state(Parent) {
+val MultiLangState : State = state(UtilsLibParent) {
 
     onEntry {
         furhat.ask(UtilsLib.GoogleSheets.localizedText("general-firstGreeting"))
@@ -34,7 +34,7 @@ val MultiLangState : State = state(Parent) {
 
     /** This one will not execute in Swedish, even though the translation is present */
     onResponse(UtilsLib.GoogleSheets.localizedIntent("general-goodbye",  intentLanguages = listOf(Language.ENGLISH_US, Language.FRENCH))) {
-        goto(Idle)
+        goto(Menu)
     }
 
     for (lang in listOf(Language.ENGLISH_US, Language.FRENCH, Language.SWEDISH)) {

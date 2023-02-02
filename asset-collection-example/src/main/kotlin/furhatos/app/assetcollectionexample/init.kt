@@ -1,6 +1,6 @@
 package furhatos.app.assetcollectionexample
 
-import furhatos.app.assetcollectionexample.flow.Idle
+import furhatos.app.assetcollectionexample.flow.Menu
 import furhatos.flow.kotlin.furhat
 import furhatos.flow.kotlin.state
 import furhatos.flow.kotlin.users
@@ -19,6 +19,6 @@ val Init = state {
         furhat.say("Hello ! This skill is a demonstration of what functions are available in the Standard Library Collection and how they can be used.")
         furhat.say("There are five different libraries available. Please wizard your way through the skill to explore them.")
 
-        goto(Idle)
+        goto(Menu)
     }
 }

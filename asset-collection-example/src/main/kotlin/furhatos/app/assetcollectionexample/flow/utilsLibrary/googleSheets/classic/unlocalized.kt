@@ -1,12 +1,11 @@
-package furhatos.app.assetcollectionexample.flow.classic
+package furhatos.app.assetcollectionexample.flow.utilsLibrary.googleSheets.classic
 
-import furhat.libraries.standard.BehaviorLib
 import furhat.libraries.standard.GesturesLib
 import furhat.libraries.standard.NluLib
 import furhat.libraries.standard.UsersLib.usersLib
 import furhat.libraries.standard.UtilsLib
-import furhatos.app.assetcollectionexample.flow.Idle
-import furhatos.app.assetcollectionexample.flow.Parent
+import furhatos.app.assetcollectionexample.flow.Menu
+import furhatos.app.assetcollectionexample.flow.utilsLibrary.UtilsLibParent
 import furhatos.app.assetcollectionexample.otherIntentsPrimarySheet
 import furhatos.app.assetcollectionexample.otherSheet
 import furhatos.app.assetcollectionexample.textsSecondarySheet
@@ -15,7 +14,7 @@ import furhatos.nlu.NullIntent
 import furhatos.nlu.common.No
 
 
-val StartUnlocalized : State = state(Parent) {
+val StartUnlocalized : State = state(UtilsLibParent) {
 
     include(UtilsLib.GoogleSheets.getPartialStateIntents()) /** From Asset Collection**/
     include(UtilsLib.GoogleSheets.getPartialStateIntents(sheetTab = otherIntentsPrimarySheet)) /** From Asset Collection**/
@@ -63,7 +62,7 @@ val StartUnlocalized : State = state(Parent) {
         furhat.say(UtilsLib.GoogleSheets.getText(key = "greeting", sheetLink = "This-sheet-does-not-exist", fallback = "This sheet doesn't exist"))
         furhat.say(UtilsLib.GoogleSheets.getText(key = "greeting", sheetTab = "This-tab-does-not-exist", fallback = "This tab doesn't exist"))
 
-        goto(Idle)
+        goto(Menu)
     }
 
     onResponse<No>{

@@ -1,13 +1,14 @@
-package furhatos.app.assetcollectionexample.flow.buttonStates
+package furhatos.app.assetcollectionexample.flow.utilsLibrary.googleSheets
 
 import furhat.libraries.standard.UtilsLib
 import furhat.libraries.standard.utils.GoogleSheetsIntegration
 import furhat.libraries.standard.utils.googleSheetsLogger
+import furhatos.app.assetcollectionexample.flow.utilsLibrary.UtilsLibParent
 import furhatos.flow.kotlin.Color
 import furhatos.flow.kotlin.furhat
 import furhatos.flow.kotlin.state
 
-val exploreTags = state(backToIdle) {
+val exploreTags = state(UtilsLibParent) {
     onEntry {
         furhat.say("The Google Sheet integration supports tags for attention, gestures, delays, L E D commands and speech alterations for azure voices")
         furhat.say("You can try the different buttons to see them, and see how they are implemented in the example Google Sheet.")

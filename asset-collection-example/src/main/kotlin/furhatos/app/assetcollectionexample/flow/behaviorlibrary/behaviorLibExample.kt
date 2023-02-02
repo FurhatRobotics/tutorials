@@ -2,11 +2,11 @@ package furhatos.app.assetcollectionexample.flow.behaviorlibrary
 
 import furhat.libraries.standard.BehaviorLib
 import furhat.libraries.standard.BehaviorLib.behaviorLib
-import furhatos.app.assetcollectionexample.flow.WizardParentButtons
+import furhatos.app.assetcollectionexample.flow.MenuParent
 import furhatos.flow.kotlin.furhat
 import furhatos.flow.kotlin.state
 
-val behaviorLibExample = state(WizardParentButtons) {
+val behaviorLibExample = state(MenuParent) {
     /** From Asset Collection
      * randomHeadMovements is a partial state with OnTime triggers for making random head movements at specified intervals.
      * Triggers of a partial state can be included in a state with "include()"
@@ -21,7 +21,7 @@ val behaviorLibExample = state(WizardParentButtons) {
     onButton("Without head movements") {
         /** Set value to avoid AutomaticHeadMovements to interfere with other head movements defined in a gesture.
          * We assume gestures are not longer than 3000 ms **/
-        BehaviorLib.AutomaticMovements.autoHeadMovementDelay(10000)
+        BehaviorLib.AutomaticMovements.autoHeadMovementDelay(15000)
         furhat.say("My head should stay still for a while.")
         furhat.say("This function should be used if gestures are played in parallel.")
     }

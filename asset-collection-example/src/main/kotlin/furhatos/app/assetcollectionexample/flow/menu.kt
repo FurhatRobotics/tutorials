@@ -4,19 +4,52 @@ import furhat.libraries.standard.UsersLib.usersLib
 import furhat.libraries.standard.UtilsLib
 import furhat.libraries.standard.utils.GoogleSheetsIntegration
 import furhatos.app.assetcollectionexample.*
-import furhatos.app.assetcollectionexample.flow.classic.StartUnlocalized
+import furhatos.app.assetcollectionexample.flow.behaviorlibrary.behaviorLibExample
+import furhatos.app.assetcollectionexample.flow.gestureslibrary.gesturesLibExample
+import furhatos.app.assetcollectionexample.flow.nluLibrary.nluLibExample
+import furhatos.app.assetcollectionexample.flow.usersLibrary.usersLibExample
+import furhatos.app.assetcollectionexample.flow.utilsLibrary.googleSheets.classic.StartUnlocalized
+import furhatos.app.assetcollectionexample.flow.utilsLibrary.utilsLibExample
 import furhatos.flow.kotlin.*
 import furhatos.util.Language
 
-val Idle: State = state(WizardParentButtons) {
+val Menu: State = state {
 
     onEntry {
         furhat.say("Which library do you want to test?", "Which library do you want to learn about?")
         furhat.listen()
     }
+
+    onButton("BehaviorLib") {
+        goto(behaviorLibExample)
+    }
+
+    onButton("GesturesLib") {
+        goto(gesturesLibExample)
+    }
+
+    onButton("NluLib") {
+        goto(nluLibExample)
+    }
+
+    onButton("UsersLib") {
+        goto(usersLibExample)
+    }
+
+    onButton("UtilsLib") {
+        goto(utilsLibExample)
+    }
+
+    //TODO : add voice commands
+
+    onNoResponse {  }
 }
 
-
+val MenuParent: State = state {
+    onButton("Menu", color = Color.Red) {
+        goto(Menu)
+    }
+}
 
 
 val removed = state {
@@ -27,7 +60,6 @@ val removed = state {
             /** From Asset Collection**/
             goto(StartUnlocalized)
         }
-
 
 
         // Classic GoogleSheet integration settings
@@ -56,4 +88,6 @@ val removed = state {
         parallel{ goto(UtilsLib.LEDs.PulseLEDState) }
         send(UtilsLib.LEDs.pulseLEDStop)
     }
+
+
 }
