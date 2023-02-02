@@ -3,12 +3,12 @@ package furhatos.app.assetcollectionexample.flow.utilsLibrary.googleSheets
 import furhat.libraries.standard.UtilsLib
 import furhat.libraries.standard.utils.GoogleSheetsIntegration
 import furhat.libraries.standard.utils.googleSheetsLogger
-import furhatos.app.assetcollectionexample.flow.utilsLibrary.UtilsLibParent
 import furhatos.flow.kotlin.Color
+import furhatos.flow.kotlin.State
 import furhatos.flow.kotlin.furhat
 import furhatos.flow.kotlin.state
 
-val exploreTags = state(UtilsLibParent) {
+val exploreTags: State = state {
     onEntry {
         furhat.say("The Google Sheet integration supports tags for attention, gestures, delays, L E D commands and speech alterations for azure voices")
         furhat.say("You can try the different buttons to see them, and see how they are implemented in the example Google Sheet.")
@@ -38,10 +38,6 @@ val exploreTags = state(UtilsLibParent) {
         furhat.say(UtilsLib.GoogleSheets.getText("sayFaster"))
     }
 
-    onButton("Explore tag gestures") {
-        goto(exploreTagGestures)
-    }
-
     onButton("List Google Sheet available gestures", color = Color.Green) {
         furhat.say("Logging the gestures")
         googleSheetsLogger.info("Available Google Sheet Gestures : \n${GoogleSheetsIntegration.utteranceGestureTagMap.keys.joinToString("\n")}")
@@ -51,6 +47,10 @@ val exploreTags = state(UtilsLibParent) {
         furhat.say("Logging the available Google Sheet tags")
         googleSheetsLogger.info("Available Google Sheet tags : \n<g/gestureName>\n<a/loc(x,y,z)>\n<d/length>\n<s/speechStyle>\n<p/prosodyRatePercentage>\n<l/R,G,B>" +
                 "\nDocumentation available here https://docs.google.com/spreadsheets/d/1vpsoIQwRnZMYoCsSsZPg7dQuv1eSyb1BajJGb48JrNw/edit#gid=745757956")
+    }
+
+    onButton("Explore tag gestures", color = Color.Yellow) {
+        goto(exploreTagGestures)
     }
 
     onButton("Where to find the logs ?", color = Color.Yellow) {

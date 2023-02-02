@@ -3,12 +3,12 @@ package furhatos.app.assetcollectionexample.flow.behaviorlibrary
 import furhat.libraries.standard.BehaviorLib
 import furhat.libraries.standard.BehaviorLib.behaviorLib
 import furhatos.app.assetcollectionexample.flow.MenuParent
+import furhatos.flow.kotlin.State
 import furhatos.flow.kotlin.furhat
 import furhatos.flow.kotlin.state
 
-val behaviorLibExample = state(MenuParent) {
-    /** From Asset Collection
-     * randomHeadMovements is a partial state with OnTime triggers for making random head movements at specified intervals.
+val behaviorLibExample: State = state(MenuParent) {
+    /** randomHeadMovements is a partial state with OnTime triggers for making random head movements at specified intervals.
      * Triggers of a partial state can be included in a state with "include()"
      */
     include(BehaviorLib.AutomaticMovements.randomHeadMovements(repetitionPeriod = 5000..10000))
@@ -18,12 +18,14 @@ val behaviorLibExample = state(MenuParent) {
         furhat.say("You can also try switching characters.")
     }
 
+    // TODO : taking too long to act (1 last gesture everytime?)
     onButton("Without head movements") {
         /** Set value to avoid AutomaticHeadMovements to interfere with other head movements defined in a gesture.
-         * We assume gestures are not longer than 3000 ms **/
-        BehaviorLib.AutomaticMovements.autoHeadMovementDelay(15000)
+         * We assume gestures are not longer than 3000 ms
+         * This function should be used if gestures are played in parallel.
+         */
+        BehaviorLib.AutomaticMovements.autoHeadMovementDelay(20000)
         furhat.say("My head should stay still for a while.")
-        furhat.say("This function should be used if gestures are played in parallel.")
     }
 
     onButton("Switch to another character") {
@@ -33,6 +35,7 @@ val behaviorLibExample = state(MenuParent) {
     }
 
     onExit {
+        println("Exiting behaviorLib")
         behaviorLib.switchToCharacter("Alex")
     }
 }

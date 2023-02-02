@@ -1,8 +1,10 @@
 package furhatos.app.assetcollectionexample.flow.utilsLibrary
 
+import furhat.libraries.standard.UtilsLib
 import furhatos.app.assetcollectionexample.flow.MenuParent
 import furhatos.app.assetcollectionexample.flow.utilsLibrary.googleSheets.googleSheetsExample
 import furhatos.app.assetcollectionexample.flow.utilsLibrary.leds.ledCommandsExample
+import furhatos.app.assetcollectionexample.logger
 import furhatos.flow.kotlin.Color
 import furhatos.flow.kotlin.State
 import furhatos.flow.kotlin.furhat
@@ -19,8 +21,24 @@ val utilsLibExample = state(MenuParent) {
         goto(ledCommandsExample)
     }
 
-    onButton("Google sheets") {
+    onButton("Google sheets", color = Color.Yellow) {
         goto(googleSheetsExample)
+    }
+
+    onButton("Random no repeat") {
+        UtilsLib.randomNoRepeat(
+            { furhat.say("This is a function that introduces variance between the options") },
+            { furhat.say("I should alternate quite often between the alternatives") },
+            { send("SayRandomEvent")})
+    }
+    onEvent("SayRandomEvent") { furhat.say("This say is from an event") }
+
+    onButton("Print list languages") {
+        logger.info("Available languages : \n" + UtilsLib.getListOfLanguages().joinToString(",\n"))
+    }
+
+    onButton("Get json resource files") {
+        furhat.say("I have ${UtilsLib.getAllFilesInResources(".json").size} dot jayson files in my resource folder")
     }
 
     /**
