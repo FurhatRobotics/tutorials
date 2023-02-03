@@ -15,7 +15,8 @@ val localizedGoogleSheetsExample : State = state {
 
     onEntry {
         logger.info("See localized sheet in the drive folder")
-        furhat.ask(UtilsLib.GoogleSheets.localizedText("general-firstGreeting"))
+        furhat.say(UtilsLib.GoogleSheets.localizedText("general-firstGreeting"))
+        furhat.ask("In this state you can try to say and understand the same lines and intents in different languages.")
     }
 
     onReentry { furhat.listen() }
@@ -45,8 +46,8 @@ val localizedGoogleSheetsExample : State = state {
      * onResponse triggered here by a "Test" or "Test me" in different languages
      */
     onResponse(UtilsLib.GoogleSheets.localizedIntent("testMyLimits")) {
-        furhat.ask(UtilsLib.GoogleSheets.localizedText("general-positiveReaction"))
-        furhat.say(UtilsLib.GoogleSheets.localizedText("announceTests")) // TODO : Not saying it ?!?
+        furhat.say(UtilsLib.GoogleSheets.localizedText("general-positiveReaction"))
+        furhat.say(UtilsLib.GoogleSheets.localizedText("announceTests"))
         furhat.listen()
     }
 

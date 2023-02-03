@@ -18,6 +18,7 @@ val unlocalizedGoogleSheetsExample : State = state {
     include(UtilsLib.GoogleSheets.getPartialStateIntents(sheetTab = otherIntentsPrimarySheet))
     // include(UtilsLib.GoogleSheets.getPartialStateIntents(sheetLink = otherSheet, sheetTab = intentsSecondarySheet))
 
+    /** Includes wizard buttons that say text */
     include(UtilsLib.GoogleSheets.getPartialStateButtons())
 
     onEntry {

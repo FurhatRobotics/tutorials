@@ -44,10 +44,9 @@ repositories {
     jcenter()
 }
 
-
 dependencies {
-    compile 'com.furhatrobotics.furhatos:furhat-commons:2.5.0'
-    compile 'com.furhatrobotics.assets:StandardLibraryCollection:1.2.0-review4-SNAP' //TODO : 1.2.0 when it's officially out
+    implementation 'com.furhatrobotics.furhatos:furhat-commons:2.5.0-whatever2'
+    implementation 'com.furhatrobotics.assets:StandardLibraryCollection:1.2.0-review7-SNAP' //TODO : 1.2.0 when it's officially out
 }
 
 jar {

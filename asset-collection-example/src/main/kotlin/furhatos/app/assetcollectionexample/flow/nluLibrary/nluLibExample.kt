@@ -6,6 +6,7 @@ import furhatos.app.assetcollectionexample.flow.MenuParent
 import furhatos.flow.kotlin.*
 import furhatos.nlu.NullIntent
 
+
 val nluLibExample = state(MenuParent) {
     onEntry {
         furhat.say("In this state you can test and see entities available in the N L U library.")
@@ -24,16 +25,15 @@ val nluLibExample = state(MenuParent) {
         furhat.listen()
     }
 
-    //TODO : Why not loading ?
-//    onResponse<NluLib.PositiveReaction> {
-//        furhat.say("I'm very happy to hear that you like it")
-//        furhat.listen()
-//    }
-//
-//    onResponse<NluLib.NegativeReaction> {
-//        furhat.say("I sad to hear that")
-//        furhat.listen()
-//    }
+    onResponse<NluLib.PositiveReaction> {
+        furhat.say("I'm very happy to hear that you like it")
+        furhat.listen()
+    }
+
+    onResponse<NluLib.NegativeReaction> {
+        furhat.say("I sad to hear that")
+        furhat.listen()
+    }
 
     onResponse<NluLib.PositiveExpression> {
         furhat.say("You are quite positive")

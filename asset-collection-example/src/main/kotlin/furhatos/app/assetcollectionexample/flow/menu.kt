@@ -5,7 +5,10 @@ import furhatos.app.assetcollectionexample.flow.gestureslibrary.gesturesLibExamp
 import furhatos.app.assetcollectionexample.flow.nluLibrary.nluLibExample
 import furhatos.app.assetcollectionexample.flow.usersLibrary.usersLibExample
 import furhatos.app.assetcollectionexample.flow.utilsLibrary.utilsLibExample
-import furhatos.flow.kotlin.*
+import furhatos.flow.kotlin.Color
+import furhatos.flow.kotlin.State
+import furhatos.flow.kotlin.furhat
+import furhatos.flow.kotlin.state
 
 val Menu: State = state {
 
