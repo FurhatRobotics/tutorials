@@ -1,12 +1,11 @@
 package furhatos.app.assetcollectionexample.flow.utilsLibrary.googleSheets.classic
 
 import furhat.libraries.standard.UtilsLib
-import furhatos.app.assetcollectionexample.*
-import furhatos.flow.kotlin.State
-import furhatos.flow.kotlin.furhat
-import furhatos.flow.kotlin.onNoResponse
-import furhatos.flow.kotlin.state
-
+import furhatos.app.assetcollectionexample.logger
+import furhatos.app.assetcollectionexample.otherIntentsPrimarySheet
+import furhatos.app.assetcollectionexample.otherSheet
+import furhatos.app.assetcollectionexample.textsSecondarySheet
+import furhatos.flow.kotlin.*
 
 val unlocalizedGoogleSheetsExample : State = state {
 
@@ -32,14 +31,20 @@ val unlocalizedGoogleSheetsExample : State = state {
     }
 
     onButton("Greetings") {
+        /**
+         * getText returns a random value from the same line of the key "greeting"
+         */
         furhat.say(UtilsLib.GoogleSheets.getText("greeting"))
-        furhat.say(UtilsLib.GoogleSheets.getText("greetingWithUtterance"))
+        /**
+         * NB: To remove some verbose you can define your own function
+         */
+        furhat.googleSay("greetingWithUtterance")
         furhat.listen()
     }
 
     onButton("Lines sheet #2") {
-        furhat.say(UtilsLib.GoogleSheets.getText("greeting", textsSecondarySheet, otherSheet))
-        furhat.ask(UtilsLib.GoogleSheets.getText("otherQuestion", sheetTab = textsSecondarySheet, sheetLink = otherSheet))
+        furhat.say(UtilsLib.GoogleSheets.getText("greeting", sheetTab = textsSecondarySheet, sheetLink = otherSheet))
+        furhat.googleAskOtherSheet("otherQuestion")
     }
 
     onButton("Fallbacks") {
@@ -50,4 +55,15 @@ val unlocalizedGoogleSheetsExample : State = state {
     }
 
     onNoResponse { furhat.listen() }
+}
+
+
+/**
+ * Furhat utility functions to remove verbose
+ */
+fun Furhat.googleSay(key: String) {
+    say(UtilsLib.GoogleSheets.getText(key))
+}
+fun Furhat.googleAskOtherSheet(key: String) {
+    ask(UtilsLib.GoogleSheets.getText(key, sheetTab = textsSecondarySheet, sheetLink = otherSheet))
 }

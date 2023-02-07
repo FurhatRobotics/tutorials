@@ -9,12 +9,17 @@ import furhatos.app.assetcollectionexample.logger
 import furhatos.app.assetcollectionexample.swedishVoice
 import furhatos.flow.kotlin.*
 import furhatos.nlu.NullIntent
+import furhatos.nlu.Response
 import furhatos.util.Language
 
 val localizedGoogleSheetsExample : State = state {
 
     onEntry {
         logger.info("See localized sheet in the drive folder")
+
+        /**
+         * localizedText returns a random value from the same line of the key "general-firstGreeting"
+         */
         furhat.say(UtilsLib.GoogleSheets.localizedText("general-firstGreeting"))
         furhat.ask("In this state you can try to say and understand the same lines and intents in different languages.")
     }
@@ -40,12 +45,12 @@ val localizedGoogleSheetsExample : State = state {
     }
 
     /**
-     * In the localized Google Sheets you can use the localized intent as an unResponse,
-     * where in the unlocalized it is used as a partial state.
+     * In the localized Google Sheets you can use the localized intent as an unResponse, where in the unlocalized it is used as a partial state.
+     * You can specify several keys for the same onResponse.
      *
      * onResponse triggered here by a "Test" or "Test me" in different languages
      */
-    onResponse(UtilsLib.GoogleSheets.localizedIntent("testMyLimits")) {
+    onResponse(UtilsLib.GoogleSheets.localizedIntent("testMyLimits", "testMyLimits2")) {
         furhat.say(UtilsLib.GoogleSheets.localizedText("general-positiveReaction"))
         furhat.say(UtilsLib.GoogleSheets.localizedText("announceTests"))
         furhat.listen()
@@ -69,12 +74,15 @@ val localizedGoogleSheetsExample : State = state {
         furhat.ask(UtilsLib.GoogleSheets.localizedText("general-positiveReaction"))
     }
 
-    onResponse(UtilsLib.GoogleSheets.localizedIntent("general-improvedNo")) {
-        furhat.ask(UtilsLib.GoogleSheets.localizedText("general-onResponseReaction"))
+    /**
+     * NB: To remove some verbose you can define your own functions
+     */
+    onResponseGoogle("general-improvedNo", "general-wait") {
+        furhat.googleAsk("general-onResponseReaction")
     }
 
-    onResponse(NullIntent) { reentry() }
 
+    onResponse(NullIntent) { reentry() }
     onNoResponse { reentry() }
 }
 
@@ -86,4 +94,17 @@ fun FlowControlRunner.changeLanguage(language: Language){
         else -> return
     }
     GoogleSheetsIntegration.textLanguage = language
+}
+
+
+/**
+ * Utility functions to remove verbose
+ */
+fun StateBuilder.onResponseGoogle(vararg keys : String, trigger: TriggerRunner<*>.(Response<*>) -> Unit) {
+    onResponse(UtilsLib.GoogleSheets.localizedIntent(*keys)) {
+        trigger(it)
+    }
+}
+fun Furhat.googleAsk(key: String) {
+    ask(UtilsLib.GoogleSheets.localizedText(key))
 }
