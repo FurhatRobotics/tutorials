@@ -39,14 +39,13 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven { url 'https://repo.gradle.org/gradle/libs-releases' }
-    maven { url "https://s3-eu-west-1.amazonaws.com/furhat-maven/snapshots"}
     maven { url "https://s3-eu-west-1.amazonaws.com/furhat-maven/releases"}
     jcenter()
 }
 
 dependencies {
-    implementation 'com.furhatrobotics.furhatos:furhat-commons:2.5.0-whatever2'
-    implementation 'com.furhatrobotics.assets:StandardLibraryCollection:1.2.0-review7-SNAP' //TODO : 1.2.0 when it's officially out
+    implementation 'com.furhatrobotics.furhatos:furhat-commons:2.5.0'
+    implementation 'com.furhatrobotics.assets:StandardLibraryCollection:1.2.0'
 }
 
 jar {
