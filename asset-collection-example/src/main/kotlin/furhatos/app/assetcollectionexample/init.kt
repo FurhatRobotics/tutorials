@@ -1,27 +1,28 @@
 package furhatos.app.assetcollectionexample
 
-import furhat.libraries.standard.UtilsLib
-import furhatos.app.assetcollectionexample.flow.Idle
-import furhatos.app.assetcollectionexample.settings.distanceToEngage
-import furhatos.app.assetcollectionexample.settings.linkGoogleSheet
-import furhatos.app.assetcollectionexample.settings.maxNumberOfUsers
+import furhatos.app.assetcollectionexample.flow.Menu
 import furhatos.flow.kotlin.furhat
 import furhatos.flow.kotlin.state
 import furhatos.flow.kotlin.users
-import furhatos.flow.kotlin.voice.Voice
+import furhatos.util.CommonUtils
+
+val logger = CommonUtils.getLogger("AssetCollectionSkill")
 
 val Init = state {
 
     init {
         users.setSimpleEngagementPolicy(distanceToEngage, maxNumberOfUsers)
-        furhat.voice = Voice("Matthew")
+        furhat.voice = englishVoice
+        furhat.mask = "Adult"
+        furhat.character = "Alex"
 
-        /** From Asset Collection
-         * Point to the google sheet used as resource for fetching utterances and logging responses
-         * Link for the browser: https://docs.google.com/spreadsheets/d/${linkGoogleSheet}/
-         **/
-        UtilsLib.GoogleSheets.updateDefaultSheetLink(linkGoogleSheet)
+        if (users.count >= 1) {
+            furhat.attend(users.random)
+        }
+        logger.info("Official StandardLibraryCollection documentation available here : https://furhat-files.s3.eu-west-1.amazonaws.com/standardlibrary-docs/1.2.0/index.html")
+        furhat.say("Hello ! This skill is a demonstration of what functions are available in the Asset Collection Library and how these functions can be used.")
+        furhat.say("There are five different libraries available. Please wizard your way through the skill to explore them.")
 
-        goto(Idle)
+        goto(Menu)
     }
 }
