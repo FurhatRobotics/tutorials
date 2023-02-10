@@ -35,14 +35,18 @@ val Menu: State = state {
     onButton("UtilsLib") {
         goto(utilsLibExample)
     }
+
+    onButton("About this skill") {
+        furhat.say("This skill demonstrates the different features and functions that are available in the Asset Collection Library, " +
+                "that is one part of the Furhat Library. Read more about the Furhat Library in our docs page at docs at furhat dot i o. " +
+                "In short, the asset collection is a place where we add experimental features and useful functions that have not yet " +
+                "been included in directly in the Furhat platform. You can get access to these features directly from intelliJ. " +
+                "In the future we hope to also include features and functions created by people from the Furhat Community. ")
+    }
 }
 
 val MenuParent: State = state {
     onButton("Menu", color = Color.Red) {
         goto(Menu)
-    }
-
-    onExit {
-        println("Leaving parent")
     }
 }

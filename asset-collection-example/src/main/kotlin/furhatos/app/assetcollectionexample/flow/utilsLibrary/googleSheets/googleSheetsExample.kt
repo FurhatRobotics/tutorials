@@ -38,6 +38,7 @@ val googleSheetsExample = state(UtilsLibParent) {
         logger.info("The example sheets are available on this drive : https://drive.google.com/drive/folders/1khxYGeDYf5JoeeVqwNs5WialVwSLF85O")
         furhat.say("Here you can test and understand how google sheets can be used to externalize the sentences I say.")
         furhat.say("There are two different implementations possible, a classic and a localized one.")
+        furhat.say("I printed the link to the google sheet used in this example in the console log. ")
         furhat.say("Note that the intents are handled in different ways in both of them, even if the text behavior is quite similar.")
     }
 
