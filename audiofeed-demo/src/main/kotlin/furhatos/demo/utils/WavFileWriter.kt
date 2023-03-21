@@ -1,4 +1,4 @@
-package furhatos.monitor
+package furhatos.demo.utils
 
 import java.io.*
 import javax.sound.sampled.AudioFileFormat
@@ -11,9 +11,9 @@ import javax.sound.sampled.AudioSystem
  */
 class WavFileWriter {
 
-    var tmpFile: File? = null
-    var wavFile: File? = null
-    var audioStream: OutputStream? = null
+    private var tmpFile: File? = null
+    private var wavFile: File? = null
+    private var audioStream: OutputStream? = null
     private var audioFormat: AudioFormat? = null
 
     @Synchronized
@@ -52,7 +52,6 @@ class WavFileWriter {
             }
         }
     }
-
 }
 
 

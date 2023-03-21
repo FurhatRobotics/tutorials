@@ -1,12 +1,13 @@
-package furhatos.monitor
+package furhatos.demo.audiofeed
 
+import furhatos.demo.utils.removeLeftChannel
+import furhatos.demo.utils.removeRightChannel
 import javax.sound.sampled.AudioSystem
 import javax.sound.sampled.SourceDataLine
 
+class FurhatAudioFeedPlayback(private val audioStreamer: FurhatAudioFeedStreamer): FurhatAudioFeedStreamer.AudioStreamingListener {
 
-class FurhatAudioFeedPlayback(val audioStreamer: FurhatAudioFeedStreamer): FurhatAudioFeedStreamer.AudioStreamingListener {
-
-    var sourceDataLine: SourceDataLine? = null
+    private var sourceDataLine: SourceDataLine? = null
 
     private var playSystem: Boolean = false
     private var playUser: Boolean = false
@@ -18,9 +19,6 @@ class FurhatAudioFeedPlayback(val audioStreamer: FurhatAudioFeedStreamer): Furha
         audioStreamer.addListener(this)
     }
 
-    override fun audioStreamingStarted() {
-    }
-
     fun start(playSystem: Boolean, playUser: Boolean) {
         this.playSystem = playSystem
         this.playUser = playUser
@@ -29,7 +27,9 @@ class FurhatAudioFeedPlayback(val audioStreamer: FurhatAudioFeedStreamer): Furha
         }
     }
 
-    fun stop() {
+    private fun stop() {
+        if (!running)
+            return
         running = false
     }
 
@@ -43,15 +43,9 @@ class FurhatAudioFeedPlayback(val audioStreamer: FurhatAudioFeedStreamer): Furha
             }
             val audioData = data.copyOf()
             if (!playUser) {
-                for (i in 0 until audioData.size / 4) {
-                    audioData[i*4] = audioData[i*4+2]
-                    audioData[i*4+1] = audioData[i*4+3]
-                }
+                removeLeftChannel(audioData)
             } else if (!playSystem) {
-                for (i in 0 until audioData.size / 4) {
-                    audioData[i*4+2] = audioData[i*4]
-                    audioData[i*4+3] = audioData[i*4+1]
-                }
+                removeRightChannel(audioData)
             }
             sourceDataLine?.write(audioData, 0, audioData.size)
         }
@@ -61,16 +55,6 @@ class FurhatAudioFeedPlayback(val audioStreamer: FurhatAudioFeedStreamer): Furha
         sourceDataLine?.stop()
         sourceDataLine?.close()
         sourceDataLine = null
-        running = false
+        stop()
     }
-}
-
-fun main() {
-    val streamer = FurhatAudioFeedStreamer()
-    val playback = FurhatAudioFeedPlayback(streamer)
-    playback.start(true, true)
-    streamer.start("127.0.0.1")
-    println("Starting playback, press return to stop.")
-    readLine()
-    streamer.stop()
 }

@@ -1,4 +1,4 @@
-package furhatos.monitor
+package furhatos.demo.audiofeed
 
 import org.zeromq.SocketType
 import org.zeromq.ZMQ
@@ -10,15 +10,14 @@ class FurhatAudioFeedStreamer {
     private val context: ZMQ.Context = ZMQ.context(1)
     var running = false
         private set
-    var runThread: Thread? = null
+    private var runThread: Thread? = null
     val audioFormat = AudioFormat(16000F, 16, 2, true, false)
-    val audioListeners = mutableListOf<AudioStreamingListener>()
-    var ipaddr = ""
+    private val audioListeners = mutableListOf<AudioStreamingListener>()
+    private var ipaddr = ""
 
     interface AudioStreamingListener {
 
         fun audioStreamingStopped()
-        fun audioStreamingStarted()
         fun audioStreamingData(data: ByteArray)
     }
 
@@ -39,7 +38,6 @@ class FurhatAudioFeedStreamer {
             connect("tcp://$ipaddr:3001")
         }
         running = true
-        audioListeners.forEach { it.audioStreamingStarted() }
         runThread = thread(start = true) {
             while (running) {
                 val data = socket!!.recv()
