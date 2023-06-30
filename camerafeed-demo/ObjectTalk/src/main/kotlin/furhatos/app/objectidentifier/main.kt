@@ -1,6 +1,5 @@
 package furhatos.app.objectidentifier
 
-import furhatos.app.objectidentifer.getConnectedSocket
 import furhatos.app.objectidentifier.flow.EnterEvent
 import furhatos.app.objectidentifier.flow.LeaveEvent
 import furhatos.app.objectidentifier.flow.Main
@@ -14,7 +13,7 @@ import kotlinx.coroutines.GlobalScope
 import zmq.ZMQ.ZMQ_SUB
 
 val logger = CommonUtils.getRootLogger()
-val objserv = "tcp://192.168.0.4:9999" //The TCP socket of the object server
+val objserv = "tcp://<local ip of your computer>:9999" //The TCP socket of the object server
 
 val subSocket: ZMQ.Socket = getConnectedSocket(ZMQ_SUB, objserv) //Makes a socket of the object server
 val enter = "enter_" //Objects that enter the view start with this string

@@ -1,6 +1,7 @@
 */build
 */out
 */.gradle
+*.gradle/
 */logs
 **/node_modules/
 */.idea
@@ -11,3 +12,4 @@ dist/
 /dist/
 */dist
 .idea/
+*bin/

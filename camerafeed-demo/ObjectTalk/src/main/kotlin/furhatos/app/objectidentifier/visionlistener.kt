@@ -1,5 +1,4 @@
-package furhatos.app.objectidentifer
-
+package furhatos.app.objectidentifier
 
 import org.zeromq.ZMQ
 

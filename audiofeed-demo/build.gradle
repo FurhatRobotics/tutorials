@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.7.21'
+    id 'org.jetbrains.kotlin.jvm' version '1.8.21'
     id 'application'
 }
 
@@ -12,7 +12,7 @@ repositories {
 
 dependencies {
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
-    implementation('org.zeromq:jeromq:0.5.3')
+    implementation 'org.zeromq:jeromq:0.5.3'
 }
 
 test {
