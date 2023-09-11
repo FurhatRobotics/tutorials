@@ -52,6 +52,8 @@ val Greeting: State = state(Parent) {
             goto(Asking)
         } else {
             furhat.say("Sorry to bother you. ")
+            furhat.gesture(GesturesLib.ExpressThinking(duration = 10.0))
+            furhat.stopGestures()
             goto(Sleeping)
         }
     }
