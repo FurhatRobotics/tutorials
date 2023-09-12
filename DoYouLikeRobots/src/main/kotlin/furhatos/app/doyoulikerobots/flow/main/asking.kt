@@ -26,7 +26,11 @@ fun DoYouLikeRobots(firstUser: Boolean): State = state(Parent) {
     onEntry {
         if (!firstUser) furhat.say("And what about you? ")
         furhat.ask {
-            +"Do you like robots?"
+            random {
+                +"Do you like robots?"
+                +"Would you say you enjoy robots?"
+                +"Are you into robots?"
+            }
         }
     }
     onReentry {
@@ -37,12 +41,24 @@ fun DoYouLikeRobots(firstUser: Boolean): State = state(Parent) {
         }
     }
     onResponse<Yes> {
-        furhat.say("How nice! ")
+        furhat.say {
+            random {
+                +"How nice! "
+                +"That's nice! "
+                +"Lovely! "
+            }
+        }
         users.current.likeRobots = true
         terminate()
     }
     onResponse<No> {
-        furhat.say("That's a shame. ")
+        furhat.say {
+            random {
+                +"That's a shame! "
+                +"Too bad! "
+                +"Bummer! "
+            }
+        }
         users.current.likeRobots = false
         terminate()
     }
