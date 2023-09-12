@@ -5,6 +5,7 @@ import furhatos.flow.kotlin.*
 
 val Sleeping: State = state {
     onEntry{
+        furhat.attendNobody()
         furhat.gesture(GesturesLib.PerformFallAsleepPersist)
     }
 
