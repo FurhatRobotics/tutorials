@@ -2,6 +2,7 @@ package furhatos.app.doyoulikerobots.flow.main
 
 import furhat.libraries.standard.GesturesLib
 import furhatos.app.doyoulikerobots.flow.Parent
+import furhatos.app.doyoulikerobots.setting.likeRobots
 import furhatos.flow.kotlin.*
 import furhatos.records.Location
 
@@ -19,8 +20,14 @@ val Ending: State = state(Parent) {
                 +"I wish you a great rest of the day, "
             }
             +GesturesLib.PerformSmile1
-            +behavior { furhat.attend(Location.DOWN) }
         }
+        if (users.current.likeRobots == true) {
+            furhat.say("knowing that you like robots, I will let my last words be: meep morp")
+        } else {
+            furhat.say("Even though you said you didn't like robots, I hoped you enjoyed this little interaction. ")
+        }
+
+        furhat.attend(Location.DOWN)
     }
     /** Wait a little before going to sleep, to avoid the interaction to restart too quickly. **/
     onTime(15000) {
