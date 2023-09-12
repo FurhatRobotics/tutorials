@@ -24,13 +24,16 @@ val Asking: State = state(Parent) {
 
 fun DoYouLikeRobots(firstUser: Boolean): State = state(Parent) {
     onEntry {
-        if (!firstUser) furhat.say("And what about you? ")
-        furhat.ask {
-            random {
-                +"Do you like robots?"
-                +"Would you say you enjoy robots?"
-                +"Are you into robots?"
+        if (firstUser) {
+            furhat.ask {
+                random {
+                    +"Do you like robots?"
+                    +"Would you say you enjoy robots?"
+                    +"Are you into robots?"
+                }
             }
+        } else {
+            furhat.ask("And what about you? ")
         }
     }
     onReentry {
