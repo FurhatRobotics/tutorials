@@ -4,6 +4,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
+
 apply plugin: 'java'
 apply plugin: 'kotlin'
 
@@ -44,17 +45,19 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.furhatrobotics.furhatos:furhat-commons:2.7.0'
+    implementation 'com.furhatrobotics.furhatos:furhat-commons:2.9.0'
 }
 
 //These new blocks are needed to package your project into a working skill file.
 jar {
-    def lowerCasedName = baseName.toLowerCase()
+    def lowerCasedName = archiveBaseName.get().toLowerCase()
     def normalizedName = lowerCasedName.substring(0,1).toUpperCase() + lowerCasedName.substring(1)
-    manifest.attributes(
-            'Class-Path': configurations.compileClasspath.collect { it.getName() }.join(' '),
-            'Main-Class': "furhatos.app.${lowerCasedName}.${normalizedName}Skill"
-    )
+    manifest {
+        attributes(
+                'Class-Path': configurations.compileClasspath.collect { it.getName() }.join(' '),
+                'Main-Class': "furhatos.app.${lowerCasedName}.${normalizedName}Skill"
+        )
+    }
 }
 
 shadowJar {
@@ -64,5 +67,5 @@ shadowJar {
     }
     from "skill.properties"
     from "assets"
-    extension 'skill'
+    archiveExtension.set('skill')
 }
