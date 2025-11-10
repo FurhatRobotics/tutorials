@@ -44,15 +44,33 @@ repositories {
 
 
 dependencies {
-    implementation 'com.furhatrobotics.furhatos:furhat-commons:2.7.1'
+    implementation 'com.furhatrobotics.furhatos:furhat-commons:2.9.0'
     implementation 'com.furhatrobotics.assets:StandardLibraryCollection:1.2.0'
 }
 
 jar {
     def lowerCasedName = archiveBaseName.get().toLowerCase()
     def normalizedName = lowerCasedName.substring(0,1).toUpperCase() + lowerCasedName.substring(1)
-    manifest.attributes(
-            'Class-Path': configurations.compileClasspath.collect { it.getName() }.join(' '),
-            'Main-Class': "furhatos.app.${lowerCasedName}.${normalizedName}Skill"
-    )
+    manifest {
+        attributes(
+                'Class-Path': configurations.compileClasspath.collect { it.getName() }.join(' '),
+                'Main-Class': "furhatos.app.${lowerCasedName}.${normalizedName}Skill"
+        )
+    }
+}
+
+//ShadowJar depends on jar being finished properly.
+shadowJar {
+    Properties properties = new Properties()
+    properties.load(project.file('skill.properties').newDataInputStream())
+    def version = properties.getProperty('version')
+    def name = properties.getProperty('name')
+    archiveFileName.set("${name}_${version}.skill")
+    manifest {
+        exclude '**/Log4j2Plugins.dat'
+        exclude '**/node_modules'
+    }
+    from "skill.properties"
+    from "assets"
+    archiveExtension.set('skill')
 }
