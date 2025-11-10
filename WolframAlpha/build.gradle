@@ -45,18 +45,22 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.furhatrobotics.furhatos:furhat-commons:2.7.0'
-    implementation 'khttp:khttp:1.0.0'
+    implementation 'com.furhatrobotics.furhatos:furhat-commons:2.9.0'
+//    implementation 'khttp:khttp:1.0.0'
+    implementation 'io.ktor:ktor-client-core:2.3.7'
+    implementation 'io.ktor:ktor-client-cio:2.3.7'
 }
 
-//These new blocks are needed to package your project into a working skill file. 
+//These new blocks are needed to package your project into a working skill file.
 jar {
-    def lowerCasedName = baseName.toLowerCase()
+    def lowerCasedName = archiveBaseName.get().toLowerCase()
     def normalizedName = lowerCasedName.substring(0,1).toUpperCase() + lowerCasedName.substring(1)
-    manifest.attributes(
-            'Class-Path': configurations.compileClasspath.collect { it.getName() }.join(' '),
-            'Main-Class': "furhatos.app.${lowerCasedName}.${normalizedName}Skill"
-    )
+    manifest {
+        attributes(
+                'Class-Path': configurations.compileClasspath.collect { it.getName() }.join(' '),
+                'Main-Class': "furhatos.app.${lowerCasedName}.${normalizedName}Skill"
+        )
+    }
 }
 
 shadowJar {
@@ -66,5 +70,5 @@ shadowJar {
     }
     from "skill.properties"
     from "assets"
-    extension 'skill'
+    archiveExtension.set('skill')
 }
