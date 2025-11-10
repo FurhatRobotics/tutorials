@@ -43,8 +43,9 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.furhatrobotics.furhatos:furhat-commons:2.7.0'
+    implementation 'com.furhatrobotics.furhatos:furhat-commons:2.9.0'
     implementation 'com.furhatrobotics.assets:StandardLibraryCollection:1.2.0'
+    implementation "org.jetbrains.kotlin:kotlin-reflect"
 }
 //ShadowJar depends on jar being finished properly.
 jar {
@@ -54,4 +55,15 @@ jar {
             'Class-Path': configurations.compileClasspath.collect { it.getName() }.join(' '),
             'Main-Class': "furhatos.app.${lowerCasedName}.${normalizedName}Skill"
     )
+}
+
+
+shadowJar {
+    manifest {
+        exclude '**/Log4j2Plugins.dat'
+        exclude '**/node_modules'
+    }
+    from "skill.properties"
+    from "assets"
+    archiveExtension.set('skill')
 }
