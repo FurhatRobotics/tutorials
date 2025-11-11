@@ -1,7 +1,8 @@
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.3.31"
-    id 'com.github.johnrengelman.shadow' version '2.0.4'
+    id "org.jetbrains.kotlin.jvm" version "1.9.24"
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
+
 
 apply plugin: 'java'
 apply plugin: 'kotlin'
@@ -17,8 +18,8 @@ compileKotlin {
     kotlinOptions {
         //Defines what jvm bytecode to use, 1.8 rather than 1.6
         jvmTarget = "1.8"
-        apiVersion = "1.3"
-        languageVersion = "1.3"
+        apiVersion = "1.8"
+        languageVersion = "1.8"
     }
 }
 
@@ -30,8 +31,8 @@ compileTestKotlin {
     kotlinOptions {
         //Defines what jvm bytecode to use, 1.8 rather than 1.6
         jvmTarget = "1.8"
-        apiVersion = "1.3"
-        languageVersion = "1.3"
+        apiVersion = "1.8"
+        languageVersion = "1.8"
     }
 }
 
@@ -45,16 +46,18 @@ repositories {
 
 
 dependencies {
-    implementation 'com.furhatrobotics.furhatos:furhat-commons:2.6.1'
+    implementation 'com.furhatrobotics.furhatos:furhat-commons:2.9.0'
 }
 
 jar {
-    def lowerCasedName = baseName.toLowerCase()
+    def lowerCasedName = archiveBaseName.get().toLowerCase()
     def normalizedName = lowerCasedName.substring(0,1).toUpperCase() + lowerCasedName.substring(1)
-    manifest.attributes(
-            'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
-            'Main-Class': "furhatos.app.${lowerCasedName}.${normalizedName}Skill"
-    )
+    manifest {
+        attributes(
+                'Class-Path': configurations.compileClasspath.collect { it.getName() }.join(' '),
+                'Main-Class': "furhatos.app.${lowerCasedName}.${normalizedName}Skill"
+        )
+    }
 }
 
 //ShadowJar depends on jar being finished properly.
@@ -65,5 +68,5 @@ shadowJar {
     }
     from "skill.properties"
     from "assets"
-    extension 'skill'
+    archiveExtension.set('skill')
 }

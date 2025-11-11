@@ -3,6 +3,11 @@ package furhatos.app.wolframalpha.flow
 import furhatos.nlu.common.*
 import furhatos.flow.kotlin.*
 import furhatos.gestures.Gestures
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.client.engine.cio.*
+import kotlinx.coroutines.runBlocking
 
 val BASE_URL = "https://api.wolframalpha.com/v1/spoken" // Endpoint for Wolfram Alpha's API with answers tailored for spoken interactions
 val APP_ID = "EQKLKA-5EGTXH74UG" // Test account, feel free to use it for testing.
@@ -47,15 +52,28 @@ fun query(question: String) = state {
         val question = question.replace("+", " plus ").replace(" ", "+")
         val query = "$BASE_URL?i=$question&appid=$APP_ID"
 
-        /* Call to WolframAlpha API made in an anynomous substate (https://docs.furhat.io/flow/#calling-anonymous-states)
-         to allow our timeout below to stop the call if it takes to long. Note that you explicitly has to cast the result to a String.
+        /* Call to WolframAlpha API made in an anonymous substate (https://docs.furhat.io/flow/#calling-anonymous-states)
+         to allow our timeout below to stop the call if it takes too long. Note that you explicitly have to cast the result to a String.
           */
         val response = call {
-            khttp.get(query).text
+            val client = HttpClient(CIO)
+            val responseText = runBlocking {
+                try {
+                    val httpResponse: HttpResponse = client.get(query)
+                    httpResponse.bodyAsText()
+                } catch (e: Exception) {
+                    println("Error fetching from Wolfram Alpha: ${e.message}")
+                    "Error"
+                } finally {
+                    client.close()
+                }
+            }
+            responseText
         } as String
 
         // Reply to user depending on the returned response
         val reply = when {
+            response == "Error" -> "I'm having issues connecting to my brain. Try again later!"
             FAILED_RESPONSES.contains(response) -> {
                 println("No answer to question: $question")
                 "Sorry bro, can't answer that"
