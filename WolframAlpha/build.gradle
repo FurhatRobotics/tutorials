@@ -45,7 +45,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.furhatrobotics.furhatos:furhat-commons:2.9.0'
+    implementation 'com.furhatrobotics.furhatos:furhat-commons:2.9.1'
 //    implementation 'khttp:khttp:1.0.0'
     implementation 'io.ktor:ktor-client-core:2.3.7'
     implementation 'io.ktor:ktor-client-cio:2.3.7'
